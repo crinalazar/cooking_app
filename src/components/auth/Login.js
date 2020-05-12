@@ -1,4 +1,4 @@
-import React, { useState,useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import AuthContext from './AuthContext';
 import UserContext from './UserContext';
@@ -21,25 +21,11 @@ export default function Login() {
         'password': '',
     });
 
-   
     const [globalErrorMessage, setGlobalError] = useState('');
     const [isSuccessfull, setSuccessfull] = useState(false);
     const [isDirty, setDirty] = useState(false);
     const { setToken} = useContext(AuthContext);
     const { setUserId } = useContext(UserContext);
-    
-    // let [user, setUser] = useState([]);
-
-    // useEffect(() => {
-    //     checkUsers();
-    //  }, []);
-    
-    //  async function checkUsers(){
-    //     const res = await axios.get('http://localhost:5000/Users', 
-    //     { params: { Email: formData.email, Password: formData.password }});
-    //     setUser(res.data.length);
-    //     console.log(res.data.length);
-    // };
     
     async function handleSubmit(e) { 
         e.preventDefault(); 
@@ -50,26 +36,25 @@ export default function Login() {
         const isInvalid = validateFormData();
        
         if(!(await isInvalid).valueOf(isInvalid)) {
-            
             setDirty(false);
-                const res = await  axios.get('http://localhost:5000/Users', 
-                { params: { Email: formData.email, Password: formData.password }});
+            const res = await axios.get('http://localhost:5000/Users', 
+            { params: { Email: formData.email, Password: formData.password }});
 
-                if (res.data.length == 1){
-                    const email = formData.email;
-                    localStorage.setItem('email', email);
-                    const token = jwt.sign({formData}, 'secretKey');
-                    let userId = res.data[0].id;
-                    setUserId(userId);
-                    setToken(token);
-                    localStorage.setItem('token', token);
-                    localStorage.setItem('userId', userId);
-                    localStorage.setItem('name', res.data[0].FirstName);
-                    localStorage.setItem('surname', res.data[0].LastName);
-                    setSuccessfull(true);
-                 } else {
-                   setGlobalError(errorMessages["account"]);
-                 }
+            if (res.data.length === 1){
+                const email = formData.email;
+                localStorage.setItem('email', email);
+                localStorage.setItem('name', res.data[0].LastName);
+                localStorage.setItem('surname', res.data[0].FirstName);
+                const token = jwt.sign({formData}, 'secretKey');
+                let userId = res.data[0].id;
+                localStorage.setItem('token', token);
+                localStorage.setItem('userId', userId);
+                setUserId(userId);
+                setToken(token);
+                setSuccessfull(true);
+            } else {
+                setGlobalError(errorMessages["account"]);
+                }
         }
     }
 
@@ -112,7 +97,7 @@ export default function Login() {
     return (
         <>
             { (globalErrorMessage ?  
-                <div role="alert">
+                <div className="loginErrorMsg" role="alert">
                     { globalErrorMessage }
                 </div>
             : null) }
@@ -122,6 +107,7 @@ export default function Login() {
                     You have been successfully logged in!
                 </div>
             : null) }
+
             <form className="form" onSubmit={ handleSubmit }>
                 <div className="formField">
                     <label htmlFor="email">Email: </label>
@@ -134,7 +120,7 @@ export default function Login() {
                         placeholder="Enter email"
                     />
                     <div>
-                        { formError.email }
+                    { formError.email }
                     </div>
                 </div>
                 <div className="formField">

@@ -1,5 +1,6 @@
 import React, { useState} from 'react';
 import axios from 'axios';
+
 import '../../style/cooking-app.css';
 
 
@@ -26,15 +27,15 @@ import '../../style/cooking-app.css';
             'Retype-password': ''
         });
 
-    const [formError, setFormError] = useState({
-        'FirstName': '',
-        'LastName': '',
-        'Age': '',
-        'Email': '',
-        'Password': '',
-        'Retype-password': '',
-        'Different-passwords': ''
-    });
+        const [formError, setFormError] = useState({
+            'FirstName': '',
+            'LastName': '',
+            'Age': '',
+            'Email': '',
+            'Password': '',
+            'Retype-password': '',
+            'Different-passwords': ''
+        });
 
     function handleInputChange(e){
         setDirty(true);
@@ -67,17 +68,16 @@ import '../../style/cooking-app.css';
 
         const isInvalid = validateFormData();
         
-        if(!(await isInvalid).valueOf(isInvalid)) {
-                localStorage.removeItem('email');
-                setDirty(false);
-                try {
-                    await axios.post('http://localhost:5000/Users/',formData );                         
-                    setSuccessfull(true);
-                    
-                } catch(e) {
-                    setGlobalError(e.response.data.message);
-                } 
-    }
+        if(!(await isInvalid).valueOf(isInvalid)){
+            localStorage.removeItem('email');
+            setDirty(false);
+            try {
+                await axios.post('http://localhost:5000/Users/', formData );                         
+                setSuccessfull(true);
+            } catch(e) {
+                setGlobalError(e.response.data.message);
+            } 
+        }
     }
 
     async function validateFormData() { 
@@ -121,19 +121,19 @@ import '../../style/cooking-app.css';
     return (
         <>
             { (globalErrorMessage ?  
-                    <div role="alert">
-                        { globalErrorMessage }
-                    </div>
+                <div role="alert">
+                    { globalErrorMessage }
+                </div>
                 : null) }
 
-                { (isSuccessfull ?  
-                    <div role="alert">
-                        Your username was created successfully!
-                    </div>
-                : null) }
+            { (isSuccessfull ?  
+                <div className="newUserMsg" role="alert">
+                    Your account was created successfully!
+                </div>
+            : null) }
 
             <form className="form" onSubmit={ handleSubmit }>
-            <div className="formField">
+                <div className="formField">
                     <label htmlFor="fname">First name: </label>
                     <input 
                             onChange={ handleInputChange }
@@ -214,7 +214,7 @@ import '../../style/cooking-app.css';
                     />
                      <div className="invalid-feedback">
                         { formError['retype-password'] }
-                        { formError['retype-password'] ? <br /> : '' }
+                        { formError['retype-password'] ? <br/> : '' }
                         { formError['different-passwords'] }
                     </div>
                 </div>
@@ -222,7 +222,6 @@ import '../../style/cooking-app.css';
             </form>
         </>
     )
-
 }
 
 

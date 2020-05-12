@@ -1,62 +1,56 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
-import UserContext from '../auth/UserContext';
-import AuthContext from '../auth/AuthContext';
 import '../../style/cooking-app.css';
 
-function RecipeDetails(){  
-    
+function RecipeDetails() {  
     const { recipeId } = useParams();
 
     const [recipe, setRecipe] = useState(null);
     const [ingredients, setIngredients] = useState(null);
-
-    const { userId } = useContext(UserContext);
-    const { token } = useContext(AuthContext);
+    const [name, setName] = useState(null);
 
     async function getRecipeById() {
         try {
             const res = await axios('http://localhost:5000/Recipes/' + recipeId);
             setRecipe(res.data);
             setIngredients(res.data.Ingredients);
+            const user = await axios.get('http://localhost:5000/UsersRecipes/', { params: { recipeId : recipeId }})
+                        .then(user => {
+                            const userName = axios.get('http://localhost:5000/Users/' + user.data[0].userId)
+                                .then(name => setName(name.data.FirstName + " " + name.data.LastName))
+                        })
         } catch(e) {
             console.warn(e);
         }
- 
     }
     
     useEffect(() => { 
         getRecipeById(recipeId); 
     }, [recipeId]);
    
-
-    if(recipe, ingredients) {
-
-    return (
-       
-        <div className= "recipeDetailsWrapper">
-            <p className="recipe-name details-name">{recipe.RecipeName} </p>
-            <p className = "recipe-author">Recipe added by: {localStorage.getItem('name')} {localStorage.getItem('surname')} </p>
-            <div className= "recipeDetails">
-                <div className="firstDet"> 
-                    <p><span className= "text-det">Preparation time:</span>{recipe.PreparationTime}</p>
-                    <p><span className= "text-det">Cooking time:</span>{recipe.CookingTime}</p>
-                    <p><span className= "text-det">Serves: </span>{recipe.Serves}</p>
-                    <p><span className= "text-det">Vegetarian: </span>{recipe.Vegetarian}</p>
-                </div>
-                <img  className="details-picture" src={recipe.Picture} alt="Recipe"/>
-                <div className="details-rest">
-                    <p className= "text-det"> Ingredients:  </p>
-                    
-                    {ingredients.map((ing, index) => <p key={index}>{ing.quantity} - {ing.type}</p>)}
+    if(recipe && ingredients) {
+        return (
+            <div className= "recipeDetailsWrapper">
+                <p className="recipe-name details-name">{recipe.RecipeName} </p>
+                <p className = "recipe-author">Recipe added by: {name} </p>
+                <div className= "recipeDetails">
+                    <div className="firstDet"> 
+                        <p><span className= "text-det">Preparation time:</span>{recipe.PreparationTime}</p>
+                        <p><span className= "text-det">Cooking time:</span>{recipe.CookingTime}</p>
+                        <p><span className= "text-det">Serves: </span>{recipe.Serves}</p>
+                        <p><span className= "text-det">Vegetarian: </span>{recipe.Vegetarian}</p>
+                        <div className="details-ing">
+                            <p className= "text-det"> Ingredients</p>
+                            {ingredients.map((ing, index) => <p key={index}>{ing.quantity} - {ing.type}</p>)}
+                        </div>
+                    </div>
+                    <img  className="details-picture" src={recipe.Picture} alt="Recipe"/>
+                    <p className="details-rest"><span className= "text-det"> How to prepare: </span> {recipe.Method}</p>
                 </div>
             </div>
-        </div>
-         
-        
-    )} else {
+        )} else {
         return <h1>Loading ...</h1>; 
     } 
 }  

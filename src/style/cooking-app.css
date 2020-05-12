@@ -13,7 +13,6 @@
 }
 
 #root{
-
     background-image: url(spice-spoon.jpg);
     background-repeat: no-repeat;
     background-size: 60%;
@@ -110,31 +109,31 @@ header p{
 
 .filter{
     display:flex;
-   align-items: center;
+    align-items: center;
     background-color: rgb(48, 48, 48);
     color: rgb(160, 160, 160);
     border-top: solid;
-    border-width: 2vw;
+    border-width: 1vw;
     border-color: rgba(0, 0, 0, 0);
 }  
+
 .filter> p{
     padding-left: 2vw;
-    font-size: 1.6vw;
+    font-size: 1.3vw;
 }
+
 .filter > input{
     display: inline-block;
     margin-left: 2vw;
     background: rgba(255,255,255,.1);
 	border: none;
 	border-radius: 10px;
-	font-size: 1.5vw;
+	font-size: 1vw;
 	outline: 0;
 	padding: 0.5vw;
 	box-sizing: border-box; 
 	background-color: #f8f8f8;
 	color:#181818;
-	box-shadow: 0 1px 0 rgba(179, 179, 179, 0.945) inset;
-   
 }                                  
 
 .recipeList{
@@ -146,8 +145,7 @@ header p{
     border-top: solid;
     border-bottom: solid;
     border-color: rgba(0, 0, 0, 0);
-    border-width: 2vw;
-   
+    border-width: 1vw;
 }
 
                                         /* css for Recipe */
@@ -174,7 +172,7 @@ header p{
     height: 100%;
 }
 
-.picture-text {
+.picture-text{
     display: inline-block;
     transition: .5s ease;
     position: absolute;
@@ -187,39 +185,30 @@ header p{
     font-size: 1.5vw;
   }
 
-  .recipe-name{
+
+.recipe-name{
     font-family: myFont; 
     font-size: 2vw;
 }
 
-  .pictures:hover .recipe-image {
+.pictures:hover .recipe-image {
     opacity: 0.3;
-  }
-  
-  .pictures:hover .picture-text {
+}
+
+.pictures:hover .picture-text {
     opacity: 1;
-  }
+}
 
                                         /* css for Footer */
 
-
 .footer{
-    display: flex;
+    display: block;
+    height: 10vw;
     background-image: url("spices.jpg");
     background-repeat: no-repeat;
-    background-size: 85%;
+    background-size: 70%;
     margin-bottom: 0px;    
 }
-
-.footer-img {
-    padding-top: 20px;
-    width: 15vw;
-    margin-left: 70vw;
-    margin-bottom: 0px;
-    
-}
-
-
 
                                          /* css for Register  */
 
@@ -276,30 +265,35 @@ header p{
     background: #fa9c8b;
 }
 
+.newUserMsg{
+    text-align: center;   
+}
+
                                         /* css for Login */
 
 .success {
     text-align: center;
 }
 
+.loginErrorMsg{
+    text-align: center;  
+}
 
                                         /* css for UserProfile */
 
 .wrapper-user{
     display:grid;
     grid-template-areas: "recipes recipes img img"
-                       "recipes recipes text btn";
+                         "recipes recipes text btn";
     grid-template-columns:  1fr 1fr 1fr 1fr;     
-
     background: linear-gradient(90deg, #ffffff 50%, #131313 20%); 
     border-top-width: 5px; 
-    margin: 0vw 3vw 2vw 3vw;
+    margin: 0vw 5vw 2vw 5vw;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); 
 }
 
 .userDetails {
     grid-area: text;
-    margin-top: 5%;
     font-family:'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     text-align: start;
     padding-left: 4%;
@@ -335,15 +329,15 @@ header p{
     text-align: end;
     color: black;
     overflow: scroll;
-    max-height: 60vw;
+    max-height: 45vw;
 }
 
 .formFieldUserProfile{
     margin-right: 1vw;
     display:grid;
     grid-template-areas: "label field";
-    grid-template-columns: 1fr 1fr;
-	font-size: 1.7vw;
+    grid-template-columns: 1fr 1.7fr;
+	font-size: 1.2vw;
     margin-bottom: 2px;
 }
 
@@ -368,7 +362,7 @@ header p{
     grid-area: label;
     text-align: end;
     color: rgb(97, 97, 97);
-    font-size: 1.9vw;
+    font-size: 1.3vw;
 }
 
 .profileFormButtons{
@@ -379,7 +373,7 @@ header p{
     cursor:pointer;
     color:#dadada;
     font-family:Arial;
-    font-size:1.7vw;
+    font-size:1vw;
     padding:5px 11px;
     text-decoration:none;
     margin: 1vw 1vw 1vw 0;
@@ -388,11 +382,12 @@ header p{
 .profileFormButtons:hover {
     background-color:#5f5f5f;
 }
+
 .postNewRecipe{
     text-align: center;
     margin-top: 1vw;
     font-family: myFont;
-    font-size: 4vw;
+    font-size: 3vw;
 }
 
 
@@ -430,11 +425,12 @@ header p{
 
 .pictures:hover .user-recipe-image {
     opacity: 0.3;
-  }
+}
   
 .pictures:hover .user-picture-text {
     opacity: 1;
-  }
+}
+
 .sidebar {
     display:grid;
     grid-template-columns: repeat(4, 1fr) ;
@@ -452,8 +448,8 @@ header p{
     overflow-x: hidden; 
     padding-top: 60px; 
     transition: 0.5s;
-    
 }
+
 .sidebar-onClick {
     display:grid;
     grid-template-columns: repeat(4, 1fr) ;
@@ -473,48 +469,41 @@ header p{
     transition: 0.5s;
 }
     
-    .closebtn {
-        color: mistyrose;
-        position: absolute;
-        top: 0;
-        right: 25px;
-        font-size: 36px;
-        margin-left: 50px;
-      }
-    
-
-    #main {
-        transition: margin-left .5s; 
-        /* padding: 20px; */
-      }
-
-      #main-onClick {
-        transition: margin-left .5s; 
-      }
-
-      .openbtn {
-        box-shadow:inset 0px 39px 0px -24px  #c4c4c4;
-        background-color: #b3b3b3;
-        border-radius:4px;
-        border:1px solid #ffffff;
-        display:block;
-        cursor:pointer;
-        color:#555555;
-        font-family:Arial;
-        font-size:1.9vw;
-        padding:6px 15px;
-        text-decoration:none;
-        text-shadow:0px 1px 0px #585858;
-    }
-    .openbtn:hover {
-        background-color:#dbdbdb;
+.closebtn {
+    color: mistyrose;
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
     }
 
 
-      @media screen and (max-height: 450px) {
-        .sidebar {padding-top: 15px;}
-        .sidebar a {font-size: 18px;}
-      }
+#main {
+    transition: margin-left .5s; 
+}
+
+#main-onClick {
+    transition: margin-left .5s; 
+}
+
+.openbtn {
+    box-shadow:inset 0px 39px 0px -24px  #c4c4c4;
+    background-color: #b3b3b3;
+    border-radius:4px;
+    border:1px solid #ffffff;
+    display:block;
+    cursor:pointer;
+    color:#3f3f3f;
+    font-family:Arial;
+    font-size:1.3vw;
+    padding:6px 15px;
+    text-decoration:none;
+}
+
+.openbtn:hover {
+    background-color:#dbdbdb;
+}
 
                                      /* css for RecipeDetails */
 
@@ -533,7 +522,7 @@ header p{
 .details-name{
     padding-top: 2vw;
     margin-bottom: 2vw;
-    font-size: 7vw;
+    font-size: 5vw;
     color: rgb(196, 195, 195);    
 }
 
@@ -541,11 +530,11 @@ header p{
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-areas: 'text img'
-                         'rest rest';
+                         'text rest';
     margin-left:15%;
     margin-right:15%;
     margin-bottom: 2.5vw;
-    
+    grid-template-rows: 23vw 100%;
     object-fit: cover;
     background-color: rgb(172, 172, 172);
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.425), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -562,16 +551,22 @@ header p{
 }
 
 .firstDet{
-    text-align: end;
+    text-align: center;
     padding-right: 1vw;
-    padding-top: 1vw;
+    padding-left: 4vw;
+    padding-top: 2vw;
+}
+
+.details-ing{
+    padding-top: 3vw;
 }
 
 .details-rest{
+    grid-area:rest;
     padding-top: 1vw;
-    padding-bottom: 1vw;
-    grid-area: rest;
-    text-align: center;
+    padding-right:1vw;
+    text-align: left;
+    padding-bottom:2vw;
 }
 
 .text-det{
@@ -600,6 +595,110 @@ header p{
 
 
 
+@media screen and (min-width: 500px) and (max-width: 799px) {
+    .recipeList{
+        column-gap: 0.4vw;
+        row-gap: 0.4vw;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .register{
+        padding-left: 30px ;
+    }
+
+    .filter> p{
+        padding-left: 2vw;
+        font-size: 2.5vw;
+    }
+    
+    .filter > input{
+        font-size: 2vw;
+    }   
+    
+    .picture-text{
+        font-size: 2.3vw;
+      }
+    
+    .recipe-name{ 
+        font-size: 2.5vw;
+    }
+    
+    .recipeDetailsWrapper{
+        font-size: 2.2vw;
+    }
+
+    .recipeDetails{
+        grid-template-areas: 'img img'
+                             'text rest';
+        grid-template-rows: 30vw 100%;
+        padding-bottom: 5vw;
+    }
+
+    .details-picture{
+        width: 50vw;
+        justify-self: center;
+    }
+
+    .wrapper-user{
+        grid-template-areas: "img img"
+                             "text btn"
+                             "recipes recipes";
+        grid-template-columns:  1fr 1fr;     
+        background: white; 
+    }
+
+    .userDetails {
+        padding-top: 1vw;
+        padding-left: 5vw;
+        margin-bottom: 2vw;
+        color: rgb(29, 29, 29);
+        font-size: 1em;
+    }
+
+    .details-name{
+        font-size: 5vw;    
+    }
+
+    .postRecipe{
+        max-height: 55vw;
+    }
+
+    .formFieldUserProfile{
+        margin-right: 2vw;
+        grid-template-columns: 0.5fr 1.7fr;
+        font-size: 2vw;
+    }    
+    
+    .ingredients{
+        font-size: 2.3vw;
+    }
+    
+    .profileFormButtons{
+        font-size:2vw;
+        margin: 1vw 2vw 1vw 0;
+    }
+    
+    .postNewRecipe{
+        font-size: 4vw;
+        padding-top: 2vw;
+    }
+
+    .openbtn {
+        font-size:2.2vw;
+    }
+    
+    nav ul {
+        grid-template-columns: repeat(4, 45px);  
+    }
+    
+    .sidebar-onClick {
+        grid-template-columns: repeat(2, 1fr) ;
+    }
+
+    .user-picture-text {
+        font-size: 2.5vw;
+    } 
+} 
 
 
-
+  
